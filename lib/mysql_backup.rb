@@ -8,7 +8,7 @@ class MySQLBackup
 
 	def run
 		destiny_file = File.join(@tmp_folder, @db+'.sql')
-		if !system("mysqldump -u #{@username} --password=#{@password} #{@db} > #{destiny_file}")
+		if !system("mysqldump -u #{@username} -p#{@password} #{@db} > #{destiny_file}")
 			puts "An error has ocurred while backuping MySQL database '#{@db}'"
 		end
 	end

@@ -4,12 +4,11 @@ class BackuperRemote
 		@tmp_folder = config[:tmp_folder]
 		@rotations = config[:rotations]
 		@destiny_path = config[:destiny_path]
-		@date_format = '%Y_%m_%d' 
+		@date_format = '%Y_%m_%d'
 	end
 
 	def run
 		config = {:tmp_folder => @tmp_folder}
-		puts config.inspect
 		check_folders
 		@backups.each do |backup|
 			backup.set_config config

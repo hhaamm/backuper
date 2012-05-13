@@ -6,5 +6,12 @@ require './local_config.rb'
 include LocalConfig
 
 backuper = BackuperLocal.new(CONFIG)
+
+if ARGV.include? '--sync-remote-config'
+	puts "Synchronizing remote config..."
+	backuper.sync_remote_config
+	exit 0
+end
+
 backuper.run
 
