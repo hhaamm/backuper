@@ -1,0 +1,13 @@
+require './lib/include.rb'
+
+config = {
+	:remote_dir => '',
+	:local_dir => '/home/bizancio/server_backup',
+	:username => 'bizancio',
+	:host => 'guia-gratis.com.ar',
+	:port => '9999'
+}
+
+backuper = BackuperLocal.new(config)
+backuper.run
+
