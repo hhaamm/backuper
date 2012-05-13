@@ -14,7 +14,7 @@ describe FolderBackup do
 			#deleting previous files
 			FileUtils.rm_rf(File.join(TMP_FOLDER, 'folder_backup'))
 
-			folder_backup = FolderBackup.new(:path => './files', :folder_name => 'folder_backup')
+			folder_backup = FolderBackup.new(:path => './files', :name => 'folder_backup')
 			config = {:tmp_folder => TMP_FOLDER}
 
 			folder_backup.set_config config

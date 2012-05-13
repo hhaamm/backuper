@@ -21,7 +21,7 @@ class BackuperRemote
 		end
 
 		filename = File.join(@destiny_path, Time.now.strftime(@date_format)+'.tar.gz')
-		system("tar -cvvf #{filename} #{@tmp_folder}")
+		system("tar -cf #{filename} #{@tmp_folder}")
 	end
 
 	def check_config
