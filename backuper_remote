@@ -1,36 +1,18 @@
-#!/usr/bin/ruby env ruby
-#
-# Backuper is a tool for make backups from a server using a secure protocol
-# (SSH).
-# Targets for backup are files, folders and MySQL databases.
-#
-# The content of backups are compressend and rotated. You can specify a
-# number of backups in a folder, and if there's more backups the older
-# will be deleted.
-#
-# You can use backuper in addition with crontab for making daily, weekly
-# or any intervaled - backups for making all your data secure.
-#
-# Dependencies: ruby, bash
-#
-# Hugo Massaroli - 2012
-#
-
-require 'lib/include.rb'
+require './lib/include.rb'
 
 # CONFIGURATION
 
 backups = [
-	FolderBackup.new(:path => '/home/bizancio/projects/quesuene', :name => 'quesuene'),
-	MySQLBackup.new(:name => 'gitazo_db', :username => 'root', :password => '123456', 'db' => 'gitazo')
+	FolderBackup.new(:path => '/home/bizancio/projects', :name => 'projects'),
+	#MySQLBackup.new(:name => 'gitazo_db', :username => 'root', :password => '123456', 'db' => 'gitazo')
 ]
 
 tmp_folder = '/tmp/backuper'
-destiny_path = '/home/backup'
+destiny_path = '/home/bizancio/backup'
 # number of versions mantained before deleting the backup.
 rotations = 4
 
 # END OF CONFIGURATION
 
-BackuperRemote.new(:backups => backups, :tmp_folder => tmp_folder, :destiny_path => destiny_path, :rotations => rotations)
-BackuperRemote.run
+backuper = BackuperRemote.new(:backups => backups, :tmp_folder => tmp_folder, :destiny_path => destiny_path, :rotations => rotations)
+backuper.run

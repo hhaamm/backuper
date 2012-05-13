@@ -4,10 +4,20 @@ class BackuperRemote
 		@tmp_folder = config[:tmp_folder]
 		@rotations = config[:rotations]
 		@destiny_path = config[:destiny_path]
+		@date_format = '%Y_%m_%d' 
 	end
 
 	def run
+		config = {:tmp_folder => @tmp_folder}
+		puts config.inspect
 		check_folders
+		@backups.each do |backup|
+			backup.set_config config
+			backup.run
+		end
+
+		filename = File.join(@destiny_path, Time.now.strftime(@date_format)+'.tar.gz')
+		system("tar -cvvf #{filename} #{@tmp_folder}")
 	end
 
 	def check_config
@@ -19,8 +29,7 @@ class BackuperRemote
 			FileUtils.rm_rf @tmp_folder
 		end
 		Dir.mkdir @tmp_folder
-
-		if !File.directory? @destiny_path
+		if !Dir.exists? @destiny_path
 			Dir.mkdir @destiny_path
 		end
 	end
