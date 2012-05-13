@@ -9,11 +9,15 @@ class BackuperRemote
 
 	def run
 		config = {:tmp_folder => @tmp_folder}
-		puts config.inspect
 		check_folders
 		@backups.each do |backup|
 			backup.set_config config
-			backup.run
+			begin
+				backup.run
+			rescue Exception => e
+				puts e
+				puts "Canceling backup #{backup.name}"
+			end
 		end
 
 		filename = File.join(@destiny_path, Time.now.strftime(@date_format)+'.tar.gz')

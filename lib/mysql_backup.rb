@@ -4,10 +4,11 @@ class MySQLBackup
 		@username = config[:username]
 		@password = config[:password]
 		@host = config[:host] || 'localhost'
+		@name = config[:name]
 	end
 
 	def run
-		destiny_file = File.join(@tmp_folder, @db+'.sql')
+		destiny_file = File.join(@tmp_folder, @name+'.sql')
 		if !system("mysqldump -u #{@username} --password=#{@password} #{@db} > #{destiny_file}")
 			puts "An error has ocurred while backuping MySQL database '#{@db}'"
 		end
@@ -15,5 +16,9 @@ class MySQLBackup
 
 	def set_config(config)
 		@tmp_folder = config[:tmp_folder]
+	end
+
+	def name
+		@name
 	end
 end

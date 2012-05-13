@@ -1,7 +1,7 @@
 class FolderBackup
 	def initialize(config)
 		@path = config[:path]
-		@folder_name = config[:name]
+		@folder_name = @name = config[:name]
 	end
 
 	def run
@@ -13,5 +13,9 @@ class FolderBackup
 
 	def set_config(config)
 		@tmp_folder = config[:tmp_folder]
+	end
+
+	def name
+		@name
 	end
 end
