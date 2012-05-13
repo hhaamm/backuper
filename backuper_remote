@@ -1,18 +1,9 @@
+#!/usr/bin/env ruby
+
 require './lib/include.rb'
+require './remote_config.rb'
 
-# CONFIGURATION
+include RemoteConfig
 
-backups = [
-	FolderBackup.new(:path => '/home/bizancio/projects', :name => 'projects'),
-	#MySQLBackup.new(:name => 'gitazo_db', :username => 'root', :password => '123456', 'db' => 'gitazo')
-]
-
-tmp_folder = '/tmp/backuper'
-destiny_path = '/home/bizancio/backup'
-# number of versions mantained before deleting the backup.
-rotations = 4
-
-# END OF CONFIGURATION
-
-backuper = BackuperRemote.new(:backups => backups, :tmp_folder => tmp_folder, :destiny_path => destiny_path, :rotations => rotations)
+backuper = BackuperRemote.new(CONFIG)
 backuper.run

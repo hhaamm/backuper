@@ -1,0 +1,13 @@
+# rename this file to local_config.rb
+
+module LocalConfig
+	CONFIG = {
+	        :remote_dir => 'your-remote-backup-dir',
+        	:local_dir => 'your-local-backup-dir',
+	        :username => 'open ssh remote username',
+        	:host => 'remote host',
+        	:port => 'remote host port',
+	        :verbose => true
+	}
+end
+
