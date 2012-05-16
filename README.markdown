@@ -39,6 +39,12 @@ crontab -e
 
 This line will run backuper every day at 12:20 am.
 
+If you are using RVM, this line won't work! You have to use:
+
+20 0 * * * /bin/bash -l -c 'cd /home/your-user/backuper && ./backuper_remote'
+
+Because in this way bash will have the neccesary environment to know where is the ruby install.
+
 5. Done! Easy, right?
 
 Local install
