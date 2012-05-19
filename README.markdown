@@ -76,6 +76,4 @@ Make configurable files with YAML or another plain text format. Remove configura
 
 Make an option for installing automatically (which creates the desired folders, give permissions, creates the crontab, etc.)
 
-Implement rotations for don't have to store alot of files (just the number of versions you need: 3, 4, whathever).
-
 Extraer el último backup en una carpeta que se pasa por parámetro.
