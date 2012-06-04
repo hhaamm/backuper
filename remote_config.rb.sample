@@ -6,7 +6,7 @@ module RemoteConfig
 		:backups => [
 			FolderBackup.new(:path => 'backuped_dir', :name => 'my_folder'),
 			# ...
-			MySQLBackup.new(:name => 'my_db', :username => 'my_user', :password => 'my_p4ss', 'db' => 'some_db')
+			MySQLBackup.new(:name => 'my_db', :username => 'my_user', :password => 'my_p4ss', :db => 'some_db')
 			# ...
 		],
 
