@@ -77,7 +77,9 @@ Restore backup
 
 1. Check the .tar.gz backup file you want to restore.
 2. Uncompress: 
+
    tar -xf <file>.tar.gz
+   
 3. Manually upload and restore your files.
 
 TODO
