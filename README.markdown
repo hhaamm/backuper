@@ -79,4 +79,4 @@ Make configurable files with YAML or another plain text format. Remove configura
 
 Make an option for installing automatically (which creates the desired folders, give permissions, creates the crontab, etc.)
 
-Extract the last backup in a customo folder.
+Extract the last backup in a custom folder.
