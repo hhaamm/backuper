@@ -28,6 +28,7 @@ Remote install
 
 1. Create a folder and give write permissions to your user.
 2. Download Backuper and put it somewhere in your user folder.
+
   cd myfolder && git clone https://github.com/hhaamm/backuper.git
 
 3. Copy the file remote_config.rb.sample to remote_config.rb and configure it.
