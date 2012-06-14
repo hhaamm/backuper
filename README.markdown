@@ -28,22 +28,25 @@ Remote install
 
 1. Create a folder and give write permissions to your user.
 2. Download Backuper and put it somewhere in your user folder.
-3. Open the file 'backuper_remote' and configure it.
+
+  cd myfolder && git clone https://github.com/hhaamm/backuper.git
+
+3. Copy the file remote_config.rb.sample to remote_config.rb and configure it.
 4. Set a crontab that executes backuper_remote in the interval that you want.
 
-Example:
+  Example:
 
-crontab -e
+  crontab -e
 
-20 0 * * * cd /home/your-user/backuper && ruby backuper_remote
+  20 0 * * * cd /home/your-user/backuper && ruby backuper_remote
 
-This line will run backuper every day at 12:20 am.
+  This line will run backuper every day at 12:20 am.
 
-If you are using RVM, this line won't work! You have to use:
+  If you are using RVM, this line won't work! You have to use:
 
-20 0 * * * /bin/bash -l -c 'cd /home/your-user/backuper && ./backuper_remote'
+  20 0 * * * /bin/bash -l -c 'cd /home/your-user/backuper && ./backuper_remote'
 
-Because in this way bash will have the neccesary environment to know where is the ruby install.
+  Because in this way bash will have the neccesary environment to know where is the ruby install.
 
 5. Done! Easy, right?
 
@@ -52,7 +55,7 @@ Local install
 
 1. Create a folder and give write permissions to your user.
 2. Download Backuper and put it somewhere in your user folder.
-3. Open the file 'backuper_local' and configure it.
+3. Copy the file local_config.rb.sample to local_config.rb and configure it.
 4. If you want, create a cron that runs backuper_local periodically. But you can run backuper_local in a manual mode too!
 5. Done! Even easier, right?
 
@@ -62,12 +65,22 @@ Use
 Remote backup
 -------------
 
-ruby backuper_remote
+./backuper_remote
 
 Local synchronization
 ---------------------
 
-ruby backuper_local
+./backuper_local
+
+Restore backup
+--------------
+
+1. Check the .tar.gz backup file you want to restore.
+2. Uncompress: 
+
+   tar -xf <file>.tar.gz
+   
+3. Manually upload and restore your files.
 
 TODO
 ====
@@ -76,4 +89,4 @@ Make configurable files with YAML or another plain text format. Remove configura
 
 Make an option for installing automatically (which creates the desired folders, give permissions, creates the crontab, etc.)
 
-Extraer el último backup en una carpeta que se pasa por parámetro.
+Extract the last backup in a custom folder.
