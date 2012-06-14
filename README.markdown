@@ -1,6 +1,6 @@
 Backuper is a tool for automatizing backups from a remote server. It contains two configurable executables, a remote one using crontab which runs periodical backups and a local one wich synchronizes a local folder with a remote backup folder.
 
-Targets for backup are files, folders and MySQL databases, but you can add your own "backupers" if you know Ruby. If you do, please let me know so I can add the option and have an improved "Backuper" :)
+Targets for backup are files, folders, MySQL and MongoDB databases, but you can add your own "backupers" if you know Ruby. If you do, please let me know so I can add the option and have an improved "Backuper" :)
 
 The content of backups are compressend and rotated. You can specify a number of backups in a folder, and if there's more backups the older will be deleted.
 
