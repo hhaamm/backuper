@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-
-require './lib/include.rb'
-require './remote_config.rb'
-
-include RemoteConfig
-
-backuper = BackuperRemote.new(CONFIG)
-backuper.run

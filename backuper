@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'trollop'
+require './lib/include.rb'
+
+opts = Trollop::options do
+  opt :config_file, "Configuration file", :type => :string # string --config-file <string>, default to nil?
+end
+
+if !opts[:config_file]
+  puts "You must specify a backup configuration file. Use the --config=FILE option."
+  exit 1
+end
+
+if !File.exists?(opts[:config_file])
+  puts "Config file doesn't exists"
+  exit 2
+end
+
+require './'+opts[:config_file]
+
+include Config
+
+TMP_FOLDER = '/tmp'
+Backuper.new(CONFIG).run

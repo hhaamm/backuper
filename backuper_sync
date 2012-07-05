@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
 require './lib/include.rb'
-require './local_config.rb'
+require './sync_config.rb'
 
-include LocalConfig
+include SyncConfig
 
-backuper = BackuperLocal.new(CONFIG)
+backuper = Backuper.new(CONFIG)
 
 if ARGV.include? '--sync-remote-config'
 	puts "Synchronizing remote config..."
