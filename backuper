@@ -5,7 +5,7 @@ require 'trollop'
 require './lib/include.rb'
 
 opts = Trollop::options do
-  opt :config_file, "Configuration file", :type => :string # string --config-file <string>, default to nil?
+  opt :config_file, "Configuration file", :type => :string
 end
 
 if !opts[:config_file]
@@ -18,7 +18,16 @@ if !File.exists?(opts[:config_file])
   exit 2
 end
 
-require './'+opts[:config_file]
+ext = File.extname(opts[:config_file])
+case ext
+when '.rb' then
+  require './'+opts[:config_file]
+when '.yml' then
+  #TODO: add yml processing here.
+else
+  puts "Unknown file extension "+ ext
+  exit 1
+end
 
 include Config
 
