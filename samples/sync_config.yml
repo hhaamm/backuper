@@ -1,0 +1,7 @@
+remote_dir: your-remote-backup-dir
+local_dir: your-local-backup-dir
+username: open ssh remote username
+host: remote host
+port: remote host port
+remote_backuper_dir: your-remote-backup-dir
+verbose: true

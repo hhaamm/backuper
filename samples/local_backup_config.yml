@@ -1,0 +1,10 @@
+backups:
+  - type: folder
+    path: /home/myuser/somefolder
+    name: folder_backup
+  - type: folder
+    path: /home/myuser/somefolder2
+    name: folder_backup_2
+
+local_target: /home/myuser/where_i_store_backups
+rotations: 2

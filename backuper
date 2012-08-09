@@ -18,18 +18,33 @@ if !File.exists?(opts[:config_file])
   exit 2
 end
 
+TMP_FOLDER = '/tmp'
+
+# TODO: utility function, put it inside an util.rb file.
+def recursive_symbolize_keys! hash
+  hash.symbolize_keys!
+  hash[:backups].each do |backup|
+    backup.symbolize_keys!
+  end
+end
+
 ext = File.extname(opts[:config_file])
 case ext
 when '.rb' then
+  # You can use an .rb file with a backuper class direcly.
+  # For now, soon this will be deprecated... we don't want to
+  # have code in configuration files ;)
   require './'+opts[:config_file]
+  include Config
+  Backuper.new(CONFIG).run
 when '.yml' then
-  #TODO: add yml processing here.
+  require 'yaml'
+  require 'activemerchant'
+  yaml_file = open(opts[:config_file]) {|f| YAML.load(f) }
+  recursive_symbolize_keys! yaml_file
+  Backuper.new(yaml_file).run
 else
   puts "Unknown file extension "+ ext
   exit 1
 end
 
-include Config
-
-TMP_FOLDER = '/tmp'
-Backuper.new(CONFIG).run
