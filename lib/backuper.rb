@@ -9,19 +9,27 @@ class Backuper
     @date_format = config[:date_format] ? config[:date_format] : '%Y_%m_%d'
     @stop_on_fail = config[:stop_on_fail] === nil ? false : config[:stop_on_fail]
     @attachment_extension = config[:attachment_extension]
+
+    @backup_classes = {
+      :folder => FolderBackup,
+      :mongo => MongoDBBackup,
+      :mysql => MySQLBackup
+    }
   end
 
   def run
     @tmp_folder = File.join(TMP_FOLDER, random_string)
     check_folders
 
-    @backups.each do |backup|
-      backup.set_config tmp_folder: @tmp_folder, local_target: @local_target, remote_target: @remote_target, mail_target: @mail_target
+    @backups.each do |backup_config|
+      type = backup_config[:type].intern
+      backup_obj = @backup_classes[type].new backup_config
+      backup_obj.set_config tmp_folder: @tmp_folder, local_target: @local_target, remote_target: @remote_target, mail_target: @mail_target
       begin
-        backup.run
+        backup_obj.run
       rescue Exception => e
         puts e
-        puts "Canceling backup #{backup.name}"
+        puts "Canceling backup #{backup_obj.name}"
         
         if @stop_on_fail
           puts "Canceling whole backup"
@@ -36,10 +44,12 @@ class Backuper
     filename = File.join(TMP_FOLDER, Time.now.strftime(@date_format)+extension)
     puts "Filename: #{filename}"
     system("tar -cf #{filename} #{@tmp_folder}")
+    FileUtils.rm_rf @tmp_folder
 
     if @local_target 
-        FileUtils.mv filename, @local_target
-        rotate_files
+      result = FileUtils.mv filename, @local_target
+      puts "File #{filename} moved successfully to #{@local_target}"
+      rotate_files
     end
 
     if @remote_target
@@ -67,7 +77,6 @@ class Backuper
     end
 
     # deleting temp data
-    FileUtils.rm_rf @tmp_folder
     if File.exists?(filename)
       File.unlink filename
     end
@@ -82,9 +91,11 @@ class Backuper
       return
     end
 
-    files = Dir[File.join(@local_target, '**', '*')].sort
+    puts "Rotating files"
 
+    files = Dir[File.join(@local_target, '**', '*')].sort
     for i in (@rotations..(files.length-1)) do
+      puts "Deleting "+files[i]
       File.delete(files[i])
     end
   end
