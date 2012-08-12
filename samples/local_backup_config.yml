@@ -5,6 +5,15 @@ backups:
   - type: folder
     path: /home/myuser/somefolder2
     name: folder_backup_2
+  - type: mysql
+    name: my_database
+    db: my_database
+    username: my_user
+    password: my_p4ssw0rd
+    host: localhost
+  - type: mongo
+    name: my_mongo_database
+    db: my_mongo_database
 
 local_target: /home/myuser/where_i_store_backups
 rotations: 2
