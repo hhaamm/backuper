@@ -22,7 +22,6 @@ end
 
 TMP_FOLDER = '/tmp'
 
-# TODO: utility function, put it inside an util.rb file.
 def recursive_symbolize_keys! hash
   hash.symbolize_keys!
   hash[:backups].each do |backup|
@@ -31,15 +30,8 @@ def recursive_symbolize_keys! hash
 end
 
 ext = File.extname(opts[:config_file])
-case ext
-when '.rb' then
-  # You can use an .rb file with a backuper class direcly.
-  # For now, soon this will be deprecated... we don't want to
-  # have code in configuration files ;)
-  require './'+opts[:config_file]
-  include Config
-  Backuper.new(CONFIG).run
-when '.yml' then
+
+if ext == '.yml' then
   require 'yaml'
   require 'activemerchant'
   yaml_file = open(opts[:config_file]) {|f| YAML.load(f) }
