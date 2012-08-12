@@ -19,7 +19,9 @@ ruby, bash, tar, crontab, rsync, scp
 
 On Ubuntu and another Debian based distributions of Linux, run:
 
+<pre>
 sudo apt-get install ruby tar crontab rsync
+</pre>
 
 You need a few gems for running Backuper, but you can download those gems using Bundler. If you don't have bundler:
 
@@ -27,8 +29,9 @@ gem install bundler
 
 Then:
 
-cd where_backuper_folder_is
-bundler install
+<pre>
+cd where_backuper_folder_is && bundler install
+</pre>
 
 
 Install
@@ -42,22 +45,28 @@ Backuper install
 1. Create a folder and give write permissions to your user.
 2. Download Backuper and put it somewhere in your user folder.
 
+  <pre>
   cd myfolder && git clone https://github.com/hhaamm/backuper.git
+  </pre>
 
 3. Copy a sample config file (i.e. samples/local_config.yml) and configure it.
 4. Set a crontab that executes backuper in the interval that you want.
 
   Example:
 
+  <pre>
   crontab -e
 
   20 0 * * * cd /home/your-user/backuper_folder && ruby backuper --config-file <my-config-file-path>
+  </pre>
 
   This line will run backuper every day at 12:20 am.
 
   If you are using RVM, this line won't work! You have to use:
 
+  <pre>
   20 0 * * * /bin/bash -l -c 'cd /home/your-user/backuper_folder && ./backuper --config-file <my-config-file-path>'
+  </pre>
 
   Because in this way bash will have the neccesary environment to know where is the ruby install.
 
@@ -77,20 +86,23 @@ Use
 
 Backuper
 --------
-
+<pre>
 ./backuper --config-file <my-config-file>
+</pre>
 
 Local synchronization
 ---------------------
-
+<pre>
 ./backuper_sync
+</pre>
 
 Restore backup
 --------------
 
 1. Check the .tar.gz backup file you want to restore.
 2. Uncompress: 
-
+   <pre>
    tar -xf <file>.tar.gz
+   </pre>
    
 3. Manually upload and restore your files.
