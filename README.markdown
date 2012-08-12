@@ -1,8 +1,8 @@
-Backuper is a tool for automatizing backups from a remote server. It's composed of two main executable files: backuper and backup_sync:
+Backuper is a tool for automatizing backups. It's composed of two main executable files: backuper and backup_sync:
 
 * backuper loads a configuration files and does a backup.
 
-* backuper_sync downloads a backup made by backuper from a remote server to a local folder. It's use is optional.
+* backuper_sync downloads a backup made by backuper from a remote server to a local folder. It's use is optional. I'ts not tested and could fail.
 
 Targets for backup are files, folders, MySQL and MongoDB databases, but you can add your own "backupers" (classes that runs backup processes) if you know Ruby.
 
@@ -20,7 +20,15 @@ ruby, bash, tar, crontab, rsync, scp
 On Ubuntu and another Debian based distributions of Linux, run:
 
 sudo apt-get install ruby tar crontab rsync
-gem install trollop
+
+You need a few gems for running Backuper, but you can download those gems using Bundler. If you don't have bundler:
+
+gem install bundler
+
+Then:
+
+cd where_backuper_folder_is
+bundler install
 
 
 Install
@@ -36,7 +44,7 @@ Backuper install
 
   cd myfolder && git clone https://github.com/hhaamm/backuper.git
 
-3. Copy a sample config file (i.e. local_config.rb.sample) somwhere and edit the file.
+3. Copy a sample config file (i.e. samples/local_config.yml) and configure it.
 4. Set a crontab that executes backuper in the interval that you want.
 
   Example:
@@ -60,7 +68,7 @@ Sync install
 
 1. Create a folder and give write permissions to your user.
 2. Download Backuper and put it somewhere in your user folder.
-3. Copy the file sync_config.rb.sample to sync_config.rb and configure it.
+3. Copy the file samples/sync_config.yml to another location and configure it.
 4. If you want, create a cron that runs backuper_sync periodically. But you can run backuper_sync in a manual mode too!
 5. Done! Even easier, right?
 
