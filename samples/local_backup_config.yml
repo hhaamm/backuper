@@ -17,3 +17,7 @@ backups:
 
 local_target: /home/myuser/where_i_store_backups
 rotations: 2
+
+# Options supported: openssl and none
+encryption: openssl
+encryption_password: anythingcanbeapassword

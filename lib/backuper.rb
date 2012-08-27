@@ -9,6 +9,8 @@ class Backuper
     @date_format = config[:date_format] ? config[:date_format] : '%Y_%m_%d'
     @stop_on_fail = config[:stop_on_fail] === nil ? false : config[:stop_on_fail]
     @attachment_extension = config[:attachment_extension]
+    @encryption = config[:encryption]
+    @encryption_password = config[:encryption_password]
 
     @backup_classes = {
       :folder => FolderBackup,
@@ -45,6 +47,13 @@ class Backuper
     puts "Filename: #{filename}"
     system("tar -cf #{filename} #{@tmp_folder}")
     FileUtils.rm_rf @tmp_folder
+
+    if @encryption == 'openssl'
+      puts "Encrypting file with openssl"
+      command = "openssl enc -e -des3 -salt -k \"#{@encryption_password}\" -in #{filename} -out #{filename}.enc"
+      puts system(command)
+      filename = filename + '.enc'
+    end
 
     if @local_target 
       result = FileUtils.mv filename, @local_target

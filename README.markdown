@@ -106,3 +106,8 @@ Restore backup
    </pre>
    
 3. Manually upload and restore your files.
+
+Unencrypt encrypted files
+-------------------------
+
+openssl enc -d -des3 -k "yourpasswordhere" -in yourencryptedfile.tar.gz.enc -out yourtarfile.tar.gz
