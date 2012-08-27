@@ -50,7 +50,7 @@ class Backuper
 
     if @encryption == 'openssl'
       puts "Encrypting file with openssl"
-      command = "openssl enc -e -des3 -salt -k \"#{@encryption_password}\" -in #{filename} -out #{filename}.enc"
+      command = "openssl enc -e -aes-256-cbc -salt -k \"#{@encryption_password}\" -in #{filename} -out #{filename}.enc"
       puts system(command)
       filename = filename + '.enc'
     end

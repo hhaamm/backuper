@@ -110,4 +110,4 @@ Restore backup
 Unencrypt encrypted files
 -------------------------
 
-openssl enc -d -des3 -k "yourpasswordhere" -in yourencryptedfile.tar.gz.enc -out yourtarfile.tar.gz
+openssl enc -d -aes-256-cbc -k "yourpasswordhere" -in yourencryptedfile.tar.gz.enc -out yourtarfile.tar.gz
