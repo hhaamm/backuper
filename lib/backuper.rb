@@ -72,7 +72,6 @@ class Backuper
       require 'mail'
 
       mail_target = @mail_target
-      mail_target = 'ham1988@gmail.com'
       mail = Mail.new do
         from    'backup@backuper.com'
         to       mail_target
