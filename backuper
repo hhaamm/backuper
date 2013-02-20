@@ -22,10 +22,20 @@ end
 
 TMP_FOLDER = '/tmp'
 
+def symbolize_keys!(hash)
+  keys = hash.keys
+  keys.each do |key|
+    if key.is_a? String
+      hash[key.to_sym] = hash[key]
+      hash.delete(key)
+    end
+  end
+end
+
 def recursive_symbolize_keys! hash
-  hash.symbolize_keys!
+  symbolize_keys! hash
   hash[:backups].each do |backup|
-    backup.symbolize_keys!
+    symbolize_keys! backup
   end
 end
 
@@ -33,7 +43,6 @@ ext = File.extname(opts[:config_file])
 
 if ext == '.yml' then
   require 'yaml'
-  require 'activemerchant'
   yaml_file = open(opts[:config_file]) {|f| YAML.load(f) }
   recursive_symbolize_keys! yaml_file
   Backuper.new(yaml_file).run
