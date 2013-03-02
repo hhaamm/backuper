@@ -102,9 +102,12 @@ class Backuper
     puts "Rotating files"
 
     files = Dir[File.join(@local_target, '**', '*')].sort
-    for i in (@rotations..(files.length-1)) do
-      puts "Deleting "+files[i]
-      File.delete(files[i])
+    files_to_delete = files.length - @rotations
+    if files_to_delete > 0
+      for i in (1..files_to_delete) do
+        puts "Deleting "+files[i]
+        File.delete(files[i])
+      end
     end
   end
 
